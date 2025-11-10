@@ -21,8 +21,8 @@ public class C_ShortestPath {
     static int N, M;
     static int[][] map;
     static boolean[][] visit;
-    static int[] driX = {0, 0, -1, 1};
-    static int[] driY = {-1, 1, 0, 0};
+    static int[] dirX = {0, 0, -1, 1};
+    static int[] dirY = {-1, 1, 0, 0};
 
     static class Node{
         int x;
@@ -68,6 +68,26 @@ public class C_ShortestPath {
 
             /* 현재 탐색을 진행할 노드 */
             Node n = q.poll();
+
+            /* 해당 정점에서 상하좌우를 살펴보는 반복문 */
+            for(int i = 0; i < 4; i++) {
+                int cx = n.x + dirX[i];
+                int cy = n.y + dirY[i];
+
+                /* 좌표가 전체 범위를 넘어간다면 확인이 불필요하므로 다음 방향 확인 */
+                if(cx < 0 || cy < 0 || cx >= N || cy >= M) continue;
+
+                /* 방문 했던 좌표이거나 벽이면 확인이 불필요하므로 다음 방향 확인 */
+                if(visit[cx][cy] || map[cx][cy] == 0) continue;
+
+                q.offer(new Node(cx, cy));
+                visit[cx][cy] = true;
+                map[cx][cy] = map[n.x][n.y] + 1;
+
+                /* 디버깅용 출력 */
+                System.out.println("cx = " + cx + " cy = " + cy);
+                System.out.println("map[cx][cy] = " + map[cx][cy]);
+            }
         }
     }
 
