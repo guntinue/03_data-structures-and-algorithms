@@ -39,8 +39,7 @@ class A_FibonacciTests {
     @ParameterizedTest
     @MethodSource("provideSource")
     public void fibonacciTest3(int input, int output) {
-//        int result = A_Fibonacci.getFibonacciNumberIter(input);
-        int result = 0;
+        int result = A_Fibonacci.getFibonacciNumberIter(input);
         Assertions.assertEquals(output, result);
     }
 }
